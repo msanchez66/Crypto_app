@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshCw, TrendingUp, TrendingDown, Minus, BarChart3, Info, Wallet, Check, ChevronDown } from 'lucide-react';
 import AdvancedAnalysis from './AdvancedAnalysis';
-import PriceChart from './PriceChart';
 import Portfolio from './Portfolio';
 
 const API_BASE = 'http://localhost:8000/api';
@@ -343,9 +342,6 @@ const CryptoDashboard = () => {
                 {tooltip.content}
               </div>
             )}
-
-            {/* Price Evolution Chart */}
-            <PriceChart coin={selectedCoin} />
 
             {/* Composite Recommendation */}
             <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
