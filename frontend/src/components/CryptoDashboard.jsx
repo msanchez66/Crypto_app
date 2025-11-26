@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RefreshCw, TrendingUp, TrendingDown, Minus, BarChart3, Info, Wallet, Check, ChevronDown } from 'lucide-react';
 import AdvancedAnalysis from './AdvancedAnalysis';
+import PriceChart from './PriceChart';
 import Portfolio from './Portfolio';
 
 const API_BASE = 'http://localhost:8000/api';
@@ -83,7 +84,7 @@ const CryptoDashboard = () => {
 
   useEffect(() => {
     if (!showAdvanced) {
-      fetchAnalysis(selectedCoin);
+    fetchAnalysis(selectedCoin);
     }
   }, [selectedCoin, showAdvanced]);
 
@@ -160,7 +161,7 @@ const CryptoDashboard = () => {
       <div className="bg-white rounded-lg shadow p-4 border border-gray-200 relative">
         <div className="flex justify-between items-start mb-3">
           <div className="flex items-center gap-2">
-            <h3 className="font-semibold text-gray-800">{name}</h3>
+          <h3 className="font-semibold text-gray-800">{name}</h3>
             <Info
               className="w-4 h-4 text-gray-400 hover:text-blue-600 cursor-help"
               onMouseEnter={(e) => showTooltip(e, tooltipContent)}
@@ -204,13 +205,13 @@ const CryptoDashboard = () => {
       <div className="max-w-7xl mx-auto">
         {/* Title Box */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Crypto Trading Dashboard
-          </h1>
-          <p className="text-gray-600">
-            Real-time technical analysis with composite indicators
-          </p>
-        </div>
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">
+                Crypto Trading Dashboard
+              </h1>
+              <p className="text-gray-600">
+                Real-time technical analysis with composite indicators
+              </p>
+            </div>
 
         {/* Crypto Selector and Actions Box */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
@@ -300,23 +301,23 @@ const CryptoDashboard = () => {
               </div>
               <div className="flex items-center gap-4 flex-wrap">
                 <div className="flex items-center gap-2 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={autoRefresh}
-                    onChange={(e) => setAutoRefresh(e.target.checked)}
-                    className="w-4 h-4"
-                  />
+                <input
+                  type="checkbox"
+                  checked={autoRefresh}
+                  onChange={(e) => setAutoRefresh(e.target.checked)}
+                  className="w-4 h-4"
+                />
                   <span>Auto-refresh (30s)</span>
                 </div>
-                <button
-                  onClick={() => fetchAnalysis(selectedCoin)}
-                  disabled={loading}
-                  className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-                >
-                  <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
-                </button>
-              </div>
+              <button
+                onClick={() => fetchAnalysis(selectedCoin)}
+                disabled={loading}
+                className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              >
+                <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
+              </button>
             </div>
+          </div>
           </div>
         </div>
 
@@ -343,6 +344,9 @@ const CryptoDashboard = () => {
               </div>
             )}
 
+        {/* Price Evolution Chart */}
+        <PriceChart coin={selectedCoin} />
+
             {/* Composite Recommendation */}
             <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
               {/* Title aligned with Composite Score column - below the figure */}
@@ -352,7 +356,7 @@ const CryptoDashboard = () => {
                   <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
                   <h2 className="text-xl font-bold text-gray-800 text-left pl-6">
                     Composite Analysis - Individual indicators average
-                  </h2>
+              </h2>
                 </div>
                 <div></div>
               </div>
@@ -411,29 +415,29 @@ const CryptoDashboard = () => {
                 <IndicatorCard name="Bollinger Bands" data={analysisData.indicators.Bollinger} />
                 <IndicatorCard name="EMA (20)" data={analysisData.indicators.EMA} />
                 <IndicatorCard name="Volume Analysis" data={analysisData.indicators.Volume} />
-              </div>
+            </div>
 
               {/* Signal Legend - Moved inside Technical Indicators box */}
               <div className="border-t pt-4">
-                <h3 className="font-semibold text-gray-800 mb-3">Signal Legend</h3>
-                <div className="grid md:grid-cols-3 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
-                      <TrendingUp className="w-4 h-4" />
-                    </div>
-                    <span>Buy Signal (+1)</span>
+              <h3 className="font-semibold text-gray-800 mb-3">Signal Legend</h3>
+              <div className="grid md:grid-cols-3 gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+                    <TrendingUp className="w-4 h-4" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center">
-                      <Minus className="w-4 h-4" />
-                    </div>
-                    <span>Hold/Neutral (0)</span>
+                  <span>Buy Signal (+1)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center">
+                    <Minus className="w-4 h-4" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center">
-                      <TrendingDown className="w-4 h-4" />
-                    </div>
-                    <span>Sell Signal (-1)</span>
+                  <span>Hold/Neutral (0)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center">
+                    <TrendingDown className="w-4 h-4" />
+                  </div>
+                  <span>Sell Signal (-1)</span>
                   </div>
                 </div>
               </div>
